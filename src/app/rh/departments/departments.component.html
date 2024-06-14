@@ -1,0 +1,161 @@
+<div class="main-wrapper">
+
+  <div class="header">
+
+
+
+
+    <div class="page-title-box">
+      <h3>RH</h3>
+    </div>
+  
+    <ul class="nav user-menu">
+      <li class="nav-item dropdown has-arrow main-drop">
+        <a href="#" class="dropdown-toggle nav-link" data-bs-toggle="dropdown">
+          <span class="user-img"><img src="../../assets/img/avatar/avatar-27.jpg" alt="User Image">
+            <span class="status online"></span></span>
+          <span>Admin</span>
+        </a>
+        <div class="dropdown-menu">
+            <a class="dropdown-item">Logout</a>
+        </div>
+      </li>
+    </ul>
+  
+  
+  </div>
+  <div class="sidebar" id="sidebar">
+    <div class="sidebar-inner slimscroll">
+      <div id="sidebar-menu" class="sidebar-menu">
+        <ul class="sidebar-vertical">
+          <br>
+  
+          <li>
+            <a routerLink=""><i class="la la-building"></i> <span> Departments </span></a>
+          </li>
+        </ul>
+      </div>
+    </div>
+  </div>
+  <div class="page-wrapper">
+    <div class="content container-fluid pb-0">
+      <div class="page-header">
+      </div>
+      <div class="row">
+        <div class="col-sm-12">
+          <div class="card mb-0">
+            <div class="d-flex justify-content-between align-items-center">
+              <h4 class="fw-bold   mb-4"><span class="text-muted fw-light">Humaine Resource /</span> All Departments ({{this.counter}})
+              </h4>
+              <div>
+
+                <button type="button" data-bs-toggle="modal" data-bs-target="#exampleModal"
+                  class="btn btn-primary rounded-pill">
+                  <i class="fa-solid fa-plus"></i> Add New Department</button>
+              </div>
+            </div>
+            <form class="card-header py-3">
+              <div class="input-group">
+                <input type="text" name="role" class="form-control" [(ngModel)]="searchedKeyword"
+                  placeholder="Search for...">
+              </div>
+            </form>
+            <div class="card-body">
+              <div class="table-responsive">
+                <table class="table table-striped custom-table mb-0 datatable">
+                  <thead>
+                    <tr>
+                      <th class="width-thirty">#</th>
+                      <th>Department Name</th>
+                      <th>Update</th>
+                      <th>Archive</th>
+
+                    </tr>
+                  </thead>
+                  <tbody>
+
+                    <tr *ngFor="let item of dataArray  index as i">
+                      <td>{{item.order}}</td>
+                      <td>{{item.department_name}}</td>
+                      <td>
+                        <button class="btn btn-outline-secondary rounded-pill" data-bs-toggle="modal"
+                          data-bs-target="#exampleModal1" (click)="getdata(item.department_name,item.id)"
+                          data-toggle="modal" data-target="#exampleModal1">Update </button>
+                      </td>
+                      <td>
+                        <button (click)="delete(item.id, i)" class="btn btn-outline-danger rounded-pill">Archive Now
+                        </button>
+
+                      </td>
+                    </tr>
+                  </tbody>
+                </table>
+              </div>
+
+            </div>
+          </div>
+
+        </div>
+        <div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+          <div class="modal-dialog">
+            <div class="modal-content">
+              <form class="modal-content" [formGroup]="add_department" #f="ngForm"
+                (ngSubmit)="addDepartment (f); f.reset()">
+                <div class="modal-header">
+                  <h5 class="modal-title" id="backDropModalTitle">Add New Department</h5>
+                  <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <div class="modal-body">
+                  <div class="row">
+                    <div class="col mb-3">
+                      <label for="nameBackdrop" class="form-label">Department Name</label>
+                      <input type="text" id="nameBackdrop" class="form-control" name="department_name"
+                        class="form-control" formControlName="department_name" placeholder="Enter Name" />
+                    </div>
+                  </div>
+
+                </div>
+                <div class="modal-footer">
+                  <button type="button" class="btn btn-outline-secondary" data-bs-dismiss="modal">
+                    Close
+                  </button>
+                  <button type="submit" class="btn btn-primary">Save</button>
+                </div>
+              </form>
+            </div>
+          </div>
+        </div>
+
+
+
+        <div class="modal fade" id="exampleModal1" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+          <div class="modal-dialog">
+            <div class="modal-content">
+              <div class="modal-header">
+                <h1 class="modal-title fs-5" id="exampleModalLabel">Update Department</h1>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+              </div>
+              <div class="modal-body">
+                <form [formGroup]="update" #f="ngForm" (ngSubmit)="updateDepartment(f); f.reset()">
+                  <div class="row">
+                    <div class="col mb-3">
+                      <label for="nameBackdrop" class="form-label">Department Name</label>
+                      <input type="text" id="nameBackdrop" class="form-control" formControlName="department_name"
+                        [(ngModel)]="data_department.department_name" ngModel class="form-control"
+                        placeholder="Enter Name" />
+                    </div>
+                  </div>
+                  <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+                    <button type="submit" class="btn btn-primary">Save changes</button>
+                  </div>
+                </form>
+              </div>
+
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
